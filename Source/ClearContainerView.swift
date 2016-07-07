@@ -15,9 +15,9 @@ import UIKit
 ///
 final class ClearContainerView: UIView {
     
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         
-        for subview in subviews where subview.pointInside(convertPoint(point, toView: subview), withEvent: event) {
+        for subview in subviews where subview.point(inside: convert(point, to: subview), with: event) {
             return true
         }
         

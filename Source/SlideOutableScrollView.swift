@@ -19,7 +19,7 @@ final class SlideOutScrollView: UIScrollView, SlideOutable {
             didLayout()
         }
     }
-    var position = SlideOutablePosition.Dynamic(visiblePart: 120) {
+    var position = SlideOutablePosition.dynamic(visiblePart: 120) {
         didSet {
             updateContentInset()
         }
@@ -30,9 +30,9 @@ final class SlideOutScrollView: UIScrollView, SlideOutable {
     
     // MARK: Methods forwarding
     
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         guard let point = slideOutPointInside(point) else { return false }
-        return super.pointInside(point, withEvent: event)
+        return super.point(inside: point, with: event)
     }
     
     override var frame: CGRect {
@@ -58,7 +58,7 @@ final class SlideOutTableView: UITableView, SlideOutable {
             didLayout()
         }
     }
-    var position = SlideOutablePosition.Dynamic(visiblePart: 120) {
+    var position = SlideOutablePosition.dynamic(visiblePart: 120) {
         didSet {
             updateContentInset()
         }
@@ -69,9 +69,9 @@ final class SlideOutTableView: UITableView, SlideOutable {
     
     // MARK: Methods forwarding
     
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         guard let point = slideOutPointInside(point) else { return false }
-        return super.pointInside(point, withEvent: event)
+        return super.point(inside: point, with: event)
     }
     
     override var frame: CGRect {

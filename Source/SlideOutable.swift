@@ -17,12 +17,12 @@ protocol SlideOutable {
 }
 
 protocol SlidePaddingDelegate: class {
-    func topPaddingDidChange(padding: CGFloat)
+    func topPaddingDidChange(_ padding: CGFloat)
 }
 
 enum SlideOutablePosition {
-    case Opened
-    case Dynamic(visiblePart: CGFloat)
+    case opened
+    case dynamic(visiblePart: CGFloat)
 }
 
 // MARK: SlideOutable Implementation
@@ -36,8 +36,8 @@ extension SlideOutable {
     func updateContentInset() {
         
         switch position {
-        case .Opened: scrollView.contentInset.top = 0
-        case .Dynamic(let visible):
+        case .opened: scrollView.contentInset.top = 0
+        case .dynamic(let visible):
             let topInset = scrollView.frame.height - visible
             
             scrollView.contentOffset.y += scrollView.contentInset.top - topInset
@@ -48,7 +48,7 @@ extension SlideOutable {
     ///
     /// Response should be used in `scrollView`'s `pointInside:withEvent:` function.
     ///
-    func slideOutPointInside(point: CGPoint) -> CGPoint? {
+    func slideOutPointInside(_ point: CGPoint) -> CGPoint? {
         guard point.y > 0 else { return nil }
         
         return CGPoint(x: scrollView.frame.midX, y: point.y) // Ingores horizontal point's position
@@ -61,8 +61,8 @@ extension SlideOutable {
         
         let visibleTopPadding: CGFloat
         switch position {
-        case .Opened: visibleTopPadding = 0
-        case .Dynamic: visibleTopPadding = max(-scrollView.contentOffset.y, 0)
+        case .opened: visibleTopPadding = 0
+        case .dynamic: visibleTopPadding = max(-scrollView.contentOffset.y, 0)
         }
         
         paddingDelegate?.topPaddingDidChange(visibleTopPadding)

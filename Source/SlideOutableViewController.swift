@@ -14,16 +14,16 @@ class SlideOutableViewController: UIViewController {
     
     // MARK: Content
     
-    func setContent(newContent: Content) {
+    func setContent(_ newContent: Content) {
         guard content != nil else {
             content = newContent
             return
         }
         
-        UIView.animateWithDuration(
-            0.2, delay: 0, options: .CurveEaseIn,
+        UIView.animate(
+            withDuration: 0.2, delay: 0, options: .curveEaseIn,
             animations: {
-                self.view.transform = CGAffineTransformMakeTranslation(0, UIScreen.mainScreen().bounds.height)
+                self.view.transform = CGAffineTransform(translationX: 0, y: UIScreen.main().bounds.height)
             },
             completion: { _ in
                 
@@ -35,9 +35,9 @@ class SlideOutableViewController: UIViewController {
                     CGPoint(x: self.slideOutable.scrollView.contentOffset.x, y: 0),
                     animated: animateOffset)
                 
-                UIView.animateWithDuration(0.25, delay: 0, options: .CurveEaseOut,
+                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut,
                     animations: {
-                        self.view.transform = CGAffineTransformIdentity
+                        self.view.transform = CGAffineTransform.identity
                     }, completion: nil)
         })
     }
@@ -61,12 +61,12 @@ class SlideOutableViewController: UIViewController {
     
     // MARK: Padding
     
-    func setPaddingDelegate(delegate: SlidePaddingDelegate) {
+    func setPaddingDelegate(_ delegate: SlidePaddingDelegate) {
         slideOutable?.paddingDelegate = delegate
     }
     
-    func setPosition(position: SlideOutablePosition) {
-        UIView.animateWithDuration(0.3) {
+    func setPosition(_ position: SlideOutablePosition) {
+        UIView.animate(withDuration: 0.3) {
             self.slideOutable?.position = position
         }
     }
@@ -77,33 +77,33 @@ class SlideOutableViewController: UIViewController {
         
         typealias TableData = protocol<UITableViewDataSource, UITableViewDelegate>
         
-        case Table(TableData, configure: ((UITableView)->())?)
-        case View(UIView)
+        case table(TableData, configure: ((UITableView)->())?)
+        case view(UIView)
         
         // MARK: Creating
         
-        private static func setup<T: SlideOutable>(slideOutable: T) -> T {
-            slideOutable.scrollView.backgroundColor = .clearColor()
+        private static func setup<T: SlideOutable>(_ slideOutable: T) -> T {
+            slideOutable.scrollView.backgroundColor = .clear()
             slideOutable.scrollView.showsVerticalScrollIndicator = false
             return slideOutable
         }
         
         private func createSlideOutable() -> SlideOutable {
             switch self {
-            case .Table(let data, let configure):
+            case .table(let data, let configure):
                 let table = Content.configured(Content.setup(SlideOutTableView()), with: data)
                 configure?(table)
                 return table
-            case .View(let view):
+            case .view(let view):
                 return Content.configured(Content.setup(SlideOutScrollView()), with: view)
             }
         }
         
-        private func reuse(slideOutable: SlideOutable?) -> Bool {
+        private func reuse(_ slideOutable: SlideOutable?) -> Bool {
             guard let slideOutable = slideOutable else { return false }
             
             switch self {
-            case .Table(let data, let configure):
+            case .table(let data, let configure):
                 guard let tableView = slideOutable as? SlideOutTableView else { return false }
                 
                 Content.configured(tableView, with: data)
@@ -111,7 +111,7 @@ class SlideOutableViewController: UIViewController {
                 tableView.reloadData()
                 return true
                 
-            case .View(let view):
+            case .view(let view):
                 guard let scrollView = slideOutable as? SlideOutScrollView else { return false }
                 
                 Content.configured(scrollView, with: view)
@@ -121,13 +121,13 @@ class SlideOutableViewController: UIViewController {
         
         // MARK: Configuring
         
-        private static func configured(tableView: SlideOutTableView, with data: TableData) -> SlideOutTableView {
+        private static func configured(_ tableView: SlideOutTableView, with data: TableData) -> SlideOutTableView {
             tableView.delegate = data
             tableView.dataSource = data
             return tableView
         }
         
-        private static func configured(scrollView: SlideOutScrollView, with view: UIView) -> SlideOutScrollView {
+        private static func configured(_ scrollView: SlideOutScrollView, with view: UIView) -> SlideOutScrollView {
             // Cleans old subviews
             scrollView.subviews.forEach{ $0.removeFromSuperview() }
             
@@ -136,8 +136,8 @@ class SlideOutableViewController: UIViewController {
             scrollView.addSubview(view)
             let views = ["v": view, "s": scrollView]
             scrollView.addConstraints(
-                NSLayoutConstraint.constraintsWithVisualFormat("H:|[v(==s)]|", options: [], metrics: nil, views: views) +
-                NSLayoutConstraint.constraintsWithVisualFormat("V:|[v]|",      options: [], metrics: nil, views: views)
+                NSLayoutConstraint.constraints(withVisualFormat: "H:|[v(==s)]|", options: [], metrics: nil, views: views) +
+                NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|",      options: [], metrics: nil, views: views)
             )
             return scrollView
         }
