@@ -10,16 +10,16 @@ import UIKit
 
 // MARK: - SlideOutable UIScrollView
 
-final class SlideOutScrollView: UIScrollView, SlideOutable {
+public final class SlideOutScrollView: UIScrollView, SlideOutable {
     
     // MARK: SlideOutable conformance
     
-    weak var paddingDelegate: SlidePaddingDelegate? {
+    weak public  var paddingDelegate: SlidePaddingDelegate? {
         didSet {
             didLayout()
         }
     }
-    var position = SlideOutablePosition.dynamic(visiblePart: 120) {
+    public var position = SlideOutablePosition.dynamic(visiblePart: 120) {
         didSet {
             updateContentInset()
         }
@@ -30,18 +30,18 @@ final class SlideOutScrollView: UIScrollView, SlideOutable {
     
     // MARK: Methods forwarding
     
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         guard let point = slideOutPointInside(point) else { return false }
         return super.point(inside: point, with: event)
     }
     
-    override var frame: CGRect {
+    override public var frame: CGRect {
         didSet {
             updateContentInset()
         }
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         didLayout()
     }
@@ -49,16 +49,16 @@ final class SlideOutScrollView: UIScrollView, SlideOutable {
 
 // MARK: - SlideOutable UITableView
 
-final class SlideOutTableView: UITableView, SlideOutable {
+public final class SlideOutTableView: UITableView, SlideOutable {
     
     // MARK: SlideOutable conformance
     
-    weak var paddingDelegate: SlidePaddingDelegate? {
+    weak public var paddingDelegate: SlidePaddingDelegate? {
         didSet {
             didLayout()
         }
     }
-    var position = SlideOutablePosition.dynamic(visiblePart: 120) {
+    public var position = SlideOutablePosition.dynamic(visiblePart: 120) {
         didSet {
             updateContentInset()
         }
@@ -69,18 +69,18 @@ final class SlideOutTableView: UITableView, SlideOutable {
     
     // MARK: Methods forwarding
     
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         guard let point = slideOutPointInside(point) else { return false }
         return super.point(inside: point, with: event)
     }
     
-    override var frame: CGRect {
+    override public var frame: CGRect {
         didSet {
             updateContentInset()
         }
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         didLayout()
     }

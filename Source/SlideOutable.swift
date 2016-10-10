@@ -16,11 +16,11 @@ protocol SlideOutable {
     var scrollView: UIScrollView { get }
 }
 
-protocol SlidePaddingDelegate: class {
+public protocol SlidePaddingDelegate: class {
     func topPaddingDidChange(_ padding: CGFloat)
 }
 
-enum SlideOutablePosition {
+public enum SlideOutablePosition {
     case opened
     case dynamic(visiblePart: CGFloat)
 }

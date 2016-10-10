@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D307A2C81DABD2640072E3FB /* SlideOutable.h in Headers */ = {isa = PBXBuildFile; fileRef = D307A2C61DABD2640072E3FB /* SlideOutable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */; };
+		D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */; };
+		D307A2CE1DABD2730072E3FB /* SlideOutableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2E1CEF3CEA0045362A /* SlideOutableScrollView.swift */; };
+		D307A2CF1DABD2730072E3FB /* SlideOutableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2F1CEF3CEA0045362A /* SlideOutableViewController.swift */; };
 		ED00FF931CEDCD0500A5BEC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00FF921CEDCD0500A5BEC9 /* AppDelegate.swift */; };
 		ED00FF951CEDCD0500A5BEC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00FF941CEDCD0500A5BEC9 /* ViewController.swift */; };
 		ED00FF981CEDCD0500A5BEC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED00FF961CEDCD0500A5BEC9 /* Main.storyboard */; };
@@ -20,7 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ED00FF8F1CEDCD0500A5BEC9 /* SlideOutable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideOutable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D307A2C41DABD2640072E3FB /* SlideOutable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlideOutable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D307A2C61DABD2640072E3FB /* SlideOutable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlideOutable.h; sourceTree = "<group>"; };
+		D307A2C71DABD2640072E3FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED00FF8F1CEDCD0500A5BEC9 /* SlideOutableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideOutableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED00FF921CEDCD0500A5BEC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED00FF941CEDCD0500A5BEC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ED00FF971CEDCD0500A5BEC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,6 +43,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D307A2C01DABD2640072E3FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ED00FF8C1CEDCD0500A5BEC9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,12 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D307A2C51DABD2640072E3FB /* SlideOutable */ = {
+			isa = PBXGroup;
+			children = (
+				D307A2C61DABD2640072E3FB /* SlideOutable.h */,
+				D307A2C71DABD2640072E3FB /* Info.plist */,
+			);
+			path = SlideOutable;
+			sourceTree = "<group>";
+		};
 		ED00FF861CEDCD0500A5BEC9 = {
 			isa = PBXGroup;
 			children = (
 				ED00FFA41CEDD53E00A5BEC9 /* MapKit.framework */,
 				ED097D2B1CEF3CEA0045362A /* Source */,
 				ED00FF911CEDCD0500A5BEC9 /* SlideOutable */,
+				D307A2C51DABD2640072E3FB /* SlideOutable */,
 				ED00FF901CEDCD0500A5BEC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,7 +84,8 @@
 		ED00FF901CEDCD0500A5BEC9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED00FF8F1CEDCD0500A5BEC9 /* SlideOutable.app */,
+				ED00FF8F1CEDCD0500A5BEC9 /* SlideOutableExample.app */,
+				D307A2C41DABD2640072E3FB /* SlideOutable.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,10 +117,39 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		D307A2C11DABD2640072E3FB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D307A2C81DABD2640072E3FB /* SlideOutable.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		ED00FF8E1CEDCD0500A5BEC9 /* SlideOutable */ = {
+		D307A2C31DABD2640072E3FB /* SlideOutable */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ED00FFA11CEDCD0500A5BEC9 /* Build configuration list for PBXNativeTarget "SlideOutable" */;
+			buildConfigurationList = D307A2C91DABD2640072E3FB /* Build configuration list for PBXNativeTarget "SlideOutable" */;
+			buildPhases = (
+				D307A2BF1DABD2640072E3FB /* Sources */,
+				D307A2C01DABD2640072E3FB /* Frameworks */,
+				D307A2C11DABD2640072E3FB /* Headers */,
+				D307A2C21DABD2640072E3FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SlideOutable;
+			productName = SlideOutable;
+			productReference = D307A2C41DABD2640072E3FB /* SlideOutable.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ED00FF8E1CEDCD0500A5BEC9 /* SlideOutableExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED00FFA11CEDCD0500A5BEC9 /* Build configuration list for PBXNativeTarget "SlideOutableExample" */;
 			buildPhases = (
 				ED00FF8B1CEDCD0500A5BEC9 /* Sources */,
 				ED00FF8C1CEDCD0500A5BEC9 /* Frameworks */,
@@ -104,9 +159,9 @@
 			);
 			dependencies = (
 			);
-			name = SlideOutable;
+			name = SlideOutableExample;
 			productName = Scroller;
-			productReference = ED00FF8F1CEDCD0500A5BEC9 /* SlideOutable.app */;
+			productReference = ED00FF8F1CEDCD0500A5BEC9 /* SlideOutableExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -119,13 +174,17 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Domas;
 				TargetAttributes = {
+					D307A2C31DABD2640072E3FB = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
 					ED00FF8E1CEDCD0500A5BEC9 = {
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 0800;
 					};
 				};
 			};
-			buildConfigurationList = ED00FF8A1CEDCD0500A5BEC9 /* Build configuration list for PBXProject "SlideOutable" */;
+			buildConfigurationList = ED00FF8A1CEDCD0500A5BEC9 /* Build configuration list for PBXProject "SlideOutableExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -138,12 +197,20 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED00FF8E1CEDCD0500A5BEC9 /* SlideOutable */,
+				ED00FF8E1CEDCD0500A5BEC9 /* SlideOutableExample */,
+				D307A2C31DABD2640072E3FB /* SlideOutable */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D307A2C21DABD2640072E3FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ED00FF8D1CEDCD0500A5BEC9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,6 +224,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D307A2BF1DABD2640072E3FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */,
+				D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */,
+				D307A2CF1DABD2730072E3FB /* SlideOutableViewController.swift in Sources */,
+				D307A2CE1DABD2730072E3FB /* SlideOutableScrollView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ED00FF8B1CEDCD0500A5BEC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -192,6 +270,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D307A2CA1DABD2640072E3FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SlideOutable/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Trafi.SlideOutable;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D307A2CB1DABD2640072E3FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SlideOutable/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Trafi.SlideOutable;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		ED00FF9F1CEDCD0500A5BEC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -289,7 +416,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SlideOutable/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.domas.SlideOutable;
-				PRODUCT_NAME = SlideOutable;
+				PRODUCT_NAME = SlideOutableExample;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -301,7 +428,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SlideOutable/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.domas.SlideOutable;
-				PRODUCT_NAME = SlideOutable;
+				PRODUCT_NAME = SlideOutableExample;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -309,7 +436,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ED00FF8A1CEDCD0500A5BEC9 /* Build configuration list for PBXProject "SlideOutable" */ = {
+		D307A2C91DABD2640072E3FB /* Build configuration list for PBXNativeTarget "SlideOutable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D307A2CA1DABD2640072E3FB /* Debug */,
+				D307A2CB1DABD2640072E3FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ED00FF8A1CEDCD0500A5BEC9 /* Build configuration list for PBXProject "SlideOutableExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED00FF9F1CEDCD0500A5BEC9 /* Debug */,
@@ -318,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED00FFA11CEDCD0500A5BEC9 /* Build configuration list for PBXNativeTarget "SlideOutable" */ = {
+		ED00FFA11CEDCD0500A5BEC9 /* Build configuration list for PBXNativeTarget "SlideOutableExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ED00FFA21CEDCD0500A5BEC9 /* Debug */,

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SlideOutableViewController: UIViewController {
+public final class SlideOutableViewController: UIViewController {
 
     // MARK: - Configuration
     
     // MARK: Content
     
-    func setContent(_ newContent: Content) {
+    public func setContent(_ newContent: Content) {
         guard content != nil else {
             content = newContent
             return
@@ -61,11 +61,11 @@ class SlideOutableViewController: UIViewController {
     
     // MARK: Padding
     
-    func setPaddingDelegate(_ delegate: SlidePaddingDelegate) {
+    public func setPaddingDelegate(_ delegate: SlidePaddingDelegate) {
         slideOutable?.paddingDelegate = delegate
     }
     
-    func setPosition(_ position: SlideOutablePosition) {
+    public func setPosition(_ position: SlideOutablePosition) {
         UIView.animate(withDuration: 0.3) {
             self.slideOutable?.position = position
         }
@@ -73,9 +73,9 @@ class SlideOutableViewController: UIViewController {
     
     // MARK: - Content
     
-    enum Content {
+    public enum Content {
         
-        typealias TableData = UITableViewDataSource & UITableViewDelegate
+        public typealias TableData = UITableViewDataSource & UITableViewDelegate
         
         case table(TableData, configure: ((UITableView)->())?)
         case view(UIView)
