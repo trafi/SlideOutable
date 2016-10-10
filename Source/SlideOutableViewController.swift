@@ -23,7 +23,7 @@ class SlideOutableViewController: UIViewController {
         UIView.animate(
             withDuration: 0.2, delay: 0, options: .curveEaseIn,
             animations: {
-                self.view.transform = CGAffineTransform(translationX: 0, y: UIScreen.main().bounds.height)
+                self.view.transform = CGAffineTransform(translationX: 0, y: UIScreen.main.bounds.height)
             },
             completion: { _ in
                 
@@ -75,7 +75,7 @@ class SlideOutableViewController: UIViewController {
     
     enum Content {
         
-        typealias TableData = protocol<UITableViewDataSource, UITableViewDelegate>
+        typealias TableData = UITableViewDataSource & UITableViewDelegate
         
         case table(TableData, configure: ((UITableView)->())?)
         case view(UIView)
@@ -83,12 +83,12 @@ class SlideOutableViewController: UIViewController {
         // MARK: Creating
         
         private static func setup<T: SlideOutable>(_ slideOutable: T) -> T {
-            slideOutable.scrollView.backgroundColor = .clear()
+            slideOutable.scrollView.backgroundColor = .clear
             slideOutable.scrollView.showsVerticalScrollIndicator = false
             return slideOutable
         }
         
-        private func createSlideOutable() -> SlideOutable {
+        fileprivate func createSlideOutable() -> SlideOutable {
             switch self {
             case .table(let data, let configure):
                 let table = Content.configured(Content.setup(SlideOutTableView()), with: data)
@@ -99,14 +99,14 @@ class SlideOutableViewController: UIViewController {
             }
         }
         
-        private func reuse(_ slideOutable: SlideOutable?) -> Bool {
+        fileprivate func reuse(_ slideOutable: SlideOutable?) -> Bool {
             guard let slideOutable = slideOutable else { return false }
             
             switch self {
             case .table(let data, let configure):
                 guard let tableView = slideOutable as? SlideOutTableView else { return false }
                 
-                Content.configured(tableView, with: data)
+                Content.configure(tableView, with: data)
                 configure?(tableView)
                 tableView.reloadData()
                 return true
@@ -114,20 +114,25 @@ class SlideOutableViewController: UIViewController {
             case .view(let view):
                 guard let scrollView = slideOutable as? SlideOutScrollView else { return false }
                 
-                Content.configured(scrollView, with: view)
+                Content.configure(scrollView, with: view)
                 return true
             }
         }
         
         // MARK: Configuring
         
-        private static func configured(_ tableView: SlideOutTableView, with data: TableData) -> SlideOutTableView {
+        private static func configure(_ tableView: SlideOutTableView, with data: TableData) {
             tableView.delegate = data
             tableView.dataSource = data
+        }
+        
+        private static func configured(_ tableView: SlideOutTableView, with data: TableData) -> SlideOutTableView {
+            configure(tableView, with: data)
             return tableView
         }
         
-        private static func configured(_ scrollView: SlideOutScrollView, with view: UIView) -> SlideOutScrollView {
+        
+        private static func configure(_ scrollView: SlideOutScrollView, with view: UIView) {
             // Cleans old subviews
             scrollView.subviews.forEach{ $0.removeFromSuperview() }
             
@@ -139,7 +144,12 @@ class SlideOutableViewController: UIViewController {
                 NSLayoutConstraint.constraints(withVisualFormat: "H:|[v(==s)]|", options: [], metrics: nil, views: views) +
                 NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|",      options: [], metrics: nil, views: views)
             )
+        }
+        
+        private static func configured(_ scrollView: SlideOutScrollView, with view: UIView) -> SlideOutScrollView {
+            configure(scrollView, with: view)
             return scrollView
         }
+        
     }
 }
