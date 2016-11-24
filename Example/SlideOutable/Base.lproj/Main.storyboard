@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SlideOutable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SlideOutableExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -19,132 +21,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7S-KO-RLT"/>
-                            <visualEffectView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFT-zo-mPM">
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Krm-De-MjZ">
-                                    <frame key="frameInset"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3C-Ib-iQs" userLabel="Buttons Container View">
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u6C-Em-hva">
-                                        <subviews>
-                                            <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fm-Ey-FHs">
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                                <state key="normal" title="Reset Table"/>
-                                                <connections>
-                                                    <action selector="resetTableTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWn-5C-wRs"/>
-                                                </connections>
-                                            </button>
-                                            <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odr-S5-DIR">
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                                <state key="normal" title="Reset View"/>
-                                                <connections>
-                                                    <action selector="resetViewTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="vZt-6J-eyV"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRw-Xi-zth">
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                                <state key="normal" title="Toggle options"/>
-                                                <connections>
-                                                    <action selector="toggleOptionsTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="S0p-ul-j5a"/>
-                                                </connections>
-                                            </button>
-                                            <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2PI-FA-NmY">
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                                <state key="normal" title="Toggle Scroll lock"/>
-                                                <connections>
-                                                    <action selector="toggleScrollLockTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="un3-g9-GBM"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oHA-og-bGQ" userLabel="Border View">
-                                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="1JY-sp-j3L"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7S-KO-RLT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3KT-8P-dbx">
+                                <rect key="frame" x="0.0" y="367" width="375" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="u6C-Em-hva" firstAttribute="top" secondItem="K3C-Ib-iQs" secondAttribute="top" id="GgD-D7-2xZ"/>
-                                    <constraint firstItem="u6C-Em-hva" firstAttribute="leading" secondItem="K3C-Ib-iQs" secondAttribute="leading" id="Tba-kY-GdD"/>
-                                    <constraint firstAttribute="trailing" secondItem="oHA-og-bGQ" secondAttribute="trailing" id="Z3T-Yh-SJo"/>
-                                    <constraint firstAttribute="bottom" secondItem="u6C-Em-hva" secondAttribute="bottom" id="ejn-WB-zY4"/>
-                                    <constraint firstAttribute="bottom" secondItem="oHA-og-bGQ" secondAttribute="bottom" id="icL-zS-nht"/>
-                                    <constraint firstAttribute="trailing" secondItem="u6C-Em-hva" secondAttribute="trailing" id="r8z-Ls-ZjR"/>
-                                    <constraint firstItem="oHA-og-bGQ" firstAttribute="leading" secondItem="K3C-Ib-iQs" secondAttribute="leading" id="rGL-GG-UVi"/>
+                                    <constraint firstAttribute="height" constant="300" placeholder="YES" id="v5A-MT-sQn"/>
                                 </constraints>
-                            </view>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-bQ-SbO">
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Y10-Lm-omA">
-                                    <frame key="frameInset"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7P-Vr-y2g" customClass="ClearContainerView" customModule="SlideOutable" customModuleProvider="target">
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="umB-tt-aXm" style="IBUITableViewCellStyleDefault" id="DCI-yq-hod">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DCI-yq-hod" id="If0-nP-91U">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="umB-tt-aXm">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="63"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <segue destination="T7R-Nv-fL9" kind="embed" id="mCw-FW-R7o"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="eKG-3A-9G4"/>
                                 </connections>
-                            </containerView>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="LhL-oa-p88">
+                                <rect key="frame" x="0.0" y="323" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="FhG-ZK-L2K"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xj9-bQ-SbO" secondAttribute="bottom" id="2ya-Ap-MhU"/>
-                            <constraint firstAttribute="trailing" secondItem="LFT-zo-mPM" secondAttribute="trailing" id="2z8-aO-mcE"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="f7P-Vr-y2g" secondAttribute="bottom" id="5vn-zD-J1g"/>
-                            <constraint firstItem="LFT-zo-mPM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6Gm-sG-ibt"/>
-                            <constraint firstAttribute="trailing" secondItem="xj9-bQ-SbO" secondAttribute="trailing" id="8Wi-vz-aNy"/>
-                            <constraint firstItem="f7P-Vr-y2g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ASW-yh-xBZ"/>
-                            <constraint firstAttribute="trailing" secondItem="x7S-KO-RLT" secondAttribute="trailing" id="BqA-AK-JtD"/>
-                            <constraint firstItem="f7P-Vr-y2g" firstAttribute="top" secondItem="K3C-Ib-iQs" secondAttribute="bottom" id="CjW-N6-Doi"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="x7S-KO-RLT" secondAttribute="bottom" id="NaE-LP-oyf"/>
-                            <constraint firstItem="LFT-zo-mPM" firstAttribute="bottom" secondItem="K3C-Ib-iQs" secondAttribute="bottom" id="Nb1-jP-6Jm"/>
-                            <constraint firstItem="LFT-zo-mPM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OpT-Yf-frQ"/>
-                            <constraint firstItem="f7P-Vr-y2g" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="WpN-d0-ydi"/>
-                            <constraint firstItem="K3C-Ib-iQs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Y5l-nv-WFG"/>
-                            <constraint firstItem="xj9-bQ-SbO" firstAttribute="top" secondItem="f7P-Vr-y2g" secondAttribute="top" id="ZWX-56-bNw"/>
-                            <constraint firstItem="x7S-KO-RLT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="a3p-HM-auD"/>
-                            <constraint firstItem="x7S-KO-RLT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hHw-2z-b2z"/>
-                            <constraint firstItem="K3C-Ib-iQs" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="j7U-pk-iS8"/>
-                            <constraint firstItem="K3C-Ib-iQs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oJd-y9-FXq"/>
-                            <constraint firstItem="xj9-bQ-SbO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="r2K-hy-sHE"/>
+                            <constraint firstItem="x7S-KO-RLT" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="7wX-rc-1kx"/>
+                            <constraint firstItem="LhL-oa-p88" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" placeholder="YES" id="IZD-La-sy1"/>
+                            <constraint firstItem="x7S-KO-RLT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="TvC-Ie-kJi"/>
+                            <constraint firstAttribute="trailing" secondItem="x7S-KO-RLT" secondAttribute="trailing" id="VyC-Un-Ufc"/>
+                            <constraint firstItem="x7S-KO-RLT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WZb-5i-InM"/>
+                            <constraint firstAttribute="trailing" secondItem="3KT-8P-dbx" secondAttribute="trailing" placeholder="YES" id="axI-aW-H8k"/>
+                            <constraint firstItem="3KT-8P-dbx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" placeholder="YES" id="dTY-hB-TVi"/>
+                            <constraint firstItem="3KT-8P-dbx" firstAttribute="top" secondItem="LhL-oa-p88" secondAttribute="bottom" placeholder="YES" id="eei-JL-ZyL"/>
+                            <constraint firstAttribute="trailing" secondItem="LhL-oa-p88" secondAttribute="trailing" placeholder="YES" id="kaG-qa-jbx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3KT-8P-dbx" secondAttribute="bottom" placeholder="YES" id="qym-q7-Utk"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomBackgroundPaddingConstraint" destination="ZWX-56-bNw" id="d2M-Ca-CFP"/>
-                        <outlet property="bottomBackgroundView" destination="xj9-bQ-SbO" id="ltX-lD-DDk"/>
-                        <outlet property="resetTableButton" destination="6fm-Ey-FHs" id="428-uK-BDd"/>
-                        <outlet property="resetViewButton" destination="odr-S5-DIR" id="mkG-W2-U1M"/>
-                        <outlet property="toggleScrollLockButton" destination="2PI-FA-NmY" id="iMI-Ke-j2n"/>
-                        <outlet property="topBackgroundView" destination="LFT-zo-mPM" id="TPr-8E-k4g"/>
+                        <outlet property="searchBar" destination="LhL-oa-p88" id="EMB-dL-srG"/>
+                        <outlet property="tableView" destination="3KT-8P-dbx" id="KV7-jy-zT8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="355" y="349"/>
-        </scene>
-        <!--Slide Outable View Controller-->
-        <scene sceneID="Mpf-ZW-bXC">
-            <objects>
-                <viewController id="T7R-Nv-fL9" customClass="SlideOutableViewController" customModule="SlideOutable" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8Pg-Zd-AOb"/>
-                        <viewControllerLayoutGuide type="bottom" id="zEo-m7-War"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rvu-5T-Pmf" customClass="ClearContainerView" customModule="SlideOutable" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="495"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5cu-In-MeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="355" y="1077"/>
+            <point key="canvasLocation" x="354.39999999999998" y="348.57571214392806"/>
         </scene>
     </scenes>
 </document>
