@@ -120,9 +120,9 @@ public class SlideOutable: ClearContainerView {
      
      Animatable.
      
-     The default value is `false`.
+     The default value is `true`.
      */
-    public var isScrollStretchable: Bool = false {
+    public var isScrollStretchable: Bool = true {
         didSet { update() }
     }
     
@@ -154,7 +154,7 @@ public class SlideOutable: ClearContainerView {
         }
     }
     
-    var minOffset: CGFloat { return !isScrollStretchable ? topPadding : max(topPadding, bounds.height - (header?.bounds.height ?? 0) - scroll.contentSize.height) }
+    var minOffset: CGFloat { return isScrollStretchable ? topPadding : max(topPadding, bounds.height - (header?.bounds.height ?? 0) - scroll.contentSize.height) }
     var maxOffset: CGFloat { return max(minOffset, bounds.height - minContentHeight) }
     var anchorOffset: CGFloat? { return anchorFraction.flatMap { bounds.height * (1 - $0) } }
     
@@ -167,7 +167,7 @@ public class SlideOutable: ClearContainerView {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-        guard isScrollStretchable else { return }
+        guard !isScrollStretchable else { return }
         update()
     }
     
