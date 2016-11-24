@@ -11,11 +11,13 @@ import UIKit
 // MARK: - ContainterView
 
 ///
-/// Passes touches if point is not inside one of its subviews
+/// Passes touches if background is clear and point is not inside one of its subviews
 ///
-final public class ClearContainerView: UIView {
+public class ClearContainerView: UIView {
     
     override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        
+        guard backgroundColor == .clear else { return super.point(inside: point, with: event) }
         
         for subview in subviews where subview.point(inside: convert(point, to: subview), with: event) {
             return true
