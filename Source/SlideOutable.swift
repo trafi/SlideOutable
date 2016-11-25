@@ -148,7 +148,7 @@ public class SlideOutable: ClearContainerView {
             guard newValue != currentOffset else { return }
             
             // Save last state
-            lastState = state
+            lastState = state(forOffset: newValue)
             
             // Change state
             header?.frame.origin.y = newValue
@@ -213,7 +213,11 @@ public class SlideOutable: ClearContainerView {
     
     /// Returns the current state of `SlideOutable` view.
     public var state: State {
-        switch currentOffset {
+        return state(forOffset: currentOffset)
+    }
+    
+    func state(forOffset offset: CGFloat) -> State {
+        switch offset {
         case minOffset:
             return .settled(.expanded)
         case anchorOffset ?? minOffset: // Makes compiler happy, dev sad :(
