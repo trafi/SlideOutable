@@ -146,6 +146,11 @@ public class SlideOutable: ClearContainerView {
         }
         set {
             guard newValue != currentOffset else { return }
+            
+            // Save last state
+            lastState = state
+            
+            // Change state
             header?.frame.origin.y = newValue
             scroll.frame.origin.y = header?.frame.maxY ?? newValue
             
@@ -220,6 +225,8 @@ public class SlideOutable: ClearContainerView {
         }
     }
     
+    lazy var lastState: State = self.state
+    
     func offset(forState state: State.Settle) -> CGFloat? {
         switch state {
         case .expanded:
@@ -291,13 +298,13 @@ public class SlideOutable: ClearContainerView {
         scroll.frame.size = CGSize(width: bounds.width, height: bounds.height - (header?.bounds.height ?? 0) - topPadding)
     }
     
-    func update(animated: Bool = false, to targetOffset: CGFloat? = nil, velocity: CGFloat? = nil, keepCurrentState: Bool = true) {
+    func update(animated: Bool = false, to targetOffset: CGFloat? = nil, velocity: CGFloat? = nil, keepLastState: Bool = true) {
         
         // Get actual target
         let target: CGFloat
         if let targetOffset = targetOffset {
             target = targetOffset
-        } else if keepCurrentState, case .settled(let settled) = state, let settledOffset = self.offset(forState: settled) {
+        } else if keepLastState, case .settled(let settled) = lastState, let settledOffset = self.offset(forState: settled) {
             target = settledOffset
         } else {
             target = currentOffset
@@ -416,7 +423,7 @@ extension SlideOutable {
         case .ended:
             let velocity = pan.velocity(in: pan.view).y
             let targetOffset = currentOffset - diff + 0.2 * velocity
-            update(animated: true, to: targetOffset, velocity: velocity, keepCurrentState: false)
+            update(animated: true, to: targetOffset, velocity: velocity, keepLastState: false)
         default: break
         }
         
