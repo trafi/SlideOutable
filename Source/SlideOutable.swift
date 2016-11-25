@@ -89,7 +89,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `0`.
      */
-    public var topPadding: CGFloat = 0 {
+    public dynamic var topPadding: CGFloat = 0 {
         didSet { update() }
     }
     
@@ -111,7 +111,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is header's `bounds.height` or `120` if header is not set.
      */
-    public var minContentHeight: CGFloat = 120 {
+    public dynamic var minContentHeight: CGFloat = 120 {
         didSet { update() }
     }
     
