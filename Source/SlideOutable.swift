@@ -206,7 +206,8 @@ public class SlideOutable: ClearContainerView {
         }
     }
     
-    var state: State {
+    /// Returns the current state of `SlideOutable` view.
+    public private(set) var state: State {
         switch currentOffset {
         case minOffset:
             return .settled(.expanded)
