@@ -158,6 +158,13 @@ public class SlideOutable: ClearContainerView {
     var maxOffset: CGFloat { return max(minOffset, bounds.height - minContentHeight) }
     var anchorOffset: CGFloat? { return anchorFraction.flatMap { bounds.height * (1 - $0) } }
     
+    var snapOffsets: [CGFloat] {
+        return [maxOffset, anchorOffset].reduce([minOffset]) { offsets, offset in
+            guard let offset = offset, offset > minOffset else { return offsets }
+            return offsets + [offset]
+        }
+    }
+    
     // MARK: - Scroll content size KVO
     
     private var scrollContentSizeContext = 0
@@ -195,19 +202,12 @@ public class SlideOutable: ClearContainerView {
      Animatable.
      */
     public func set(state: State.Settle) {
-        switch state {
-        case .expanded:
-            currentOffset = minOffset
-        case .anchored:
-            guard let anchorOffset = anchorOffset else { return }
-            currentOffset = anchorOffset
-        case .collapsed:
-            currentOffset = maxOffset
-        }
+        guard let newOffset = offset(forState: state) else { return }
+        currentOffset = newOffset
     }
     
     /// Returns the current state of `SlideOutable` view.
-    public private(set) var state: State {
+    public var state: State {
         switch currentOffset {
         case minOffset:
             return .settled(.expanded)
@@ -217,6 +217,17 @@ public class SlideOutable: ClearContainerView {
             return .settled(.collapsed)
         default:
             return .dragging(offset: currentOffset)
+        }
+    }
+    
+    func offset(forState state: State.Settle) -> CGFloat? {
+        switch state {
+        case .expanded:
+            return minOffset
+        case .anchored:
+            return anchorOffset
+        case .collapsed:
+            return maxOffset
         }
     }
     
@@ -280,16 +291,22 @@ public class SlideOutable: ClearContainerView {
         scroll.frame.size = CGSize(width: bounds.width, height: bounds.height - (header?.bounds.height ?? 0) - topPadding)
     }
     
-    func update(animated: Bool = false, to targetOffset: CGFloat? = nil, velocity: CGFloat? = nil) {
-        let targetOffset = targetOffset ?? currentOffset
-        let snapOffsets = [maxOffset, anchorOffset].reduce([minOffset]) { offsets, offset in
-            guard let offset = offset, offset > minOffset else { return offsets }
-            return offsets + [offset]
+    func update(animated: Bool = false, to targetOffset: CGFloat? = nil, velocity: CGFloat? = nil, keepCurrentState: Bool = true) {
+        
+        // Get actual target
+        let target: CGFloat
+        if let targetOffset = targetOffset {
+            target = targetOffset
+        } else if keepCurrentState, case .settled(let settled) = state, let settledOffset = self.offset(forState: settled) {
+            target = settledOffset
+        } else {
+            target = currentOffset
         }
         
+        // Get actual offset
         let offset: CGFloat = snapOffsets.dropFirst().reduce(snapOffsets[0]) { closest, current in
-            let closestDiff = abs(targetOffset - closest)
-            let currentDiff = abs(targetOffset - current)
+            let closestDiff = abs(target - closest)
+            let currentDiff = abs(target - current)
             return closestDiff < currentDiff ? closest : current
         }
         
@@ -399,7 +416,7 @@ extension SlideOutable {
         case .ended:
             let velocity = pan.velocity(in: pan.view).y
             let targetOffset = currentOffset - diff + 0.2 * velocity
-            update(animated: true, to: targetOffset, velocity: velocity)
+            update(animated: true, to: targetOffset, velocity: velocity, keepCurrentState: false)
         default: break
         }
         
