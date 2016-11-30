@@ -291,7 +291,7 @@ public class SlideOutable: ClearContainerView {
     
     // MARK: - Updates
     
-    public override var bounds: CGRect {
+    public override var frame: CGRect {
         didSet {
             updateScrollSize()
             update()
