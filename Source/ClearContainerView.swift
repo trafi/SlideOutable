@@ -15,14 +15,12 @@ import UIKit
 ///
 public class ClearContainerView: UIView {
     
-    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    public weak var viewForClearTouches: UIView?
+
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let superHit = super.hitTest(point, with: event)
+        guard backgroundColor == .clear else { return superHit }
         
-        guard backgroundColor == .clear else { return super.point(inside: point, with: event) }
-        
-        for subview in subviews where subview.point(inside: convert(point, to: subview), with: event) {
-            return true
-        }
-        
-        return false
+        return self == superHit ? viewForClearTouches?.hitTest(point, with: event) : superHit
     }
 }
