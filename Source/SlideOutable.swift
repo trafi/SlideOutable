@@ -217,6 +217,7 @@ public class SlideOutable: ClearContainerView {
      Animatable.
      */
     public func set(state: State.Settle) {
+        lastState = .settled(state)
         guard let newOffset = offset(forState: state) else { return }
         currentOffset = newOffset
     }
