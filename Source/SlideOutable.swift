@@ -116,6 +116,16 @@ public class SlideOutable: ClearContainerView {
     }
     
     /**
+     Proxy for `minimumContentHeight` without header's `bounds.height`.
+     
+     Animatable.
+     */
+    public var minScrollHeight: CGFloat {
+        get { return minContentHeight - (header?.bounds.height ?? 0) }
+        set { minContentHeight = newValue + (header?.bounds.height ?? 0) }
+    }
+    
+    /**
      Determens weather the scroll's `bounds.height` can get bigger than it's `contentSize.height`.
      
      Animatable.
