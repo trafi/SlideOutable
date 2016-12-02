@@ -150,7 +150,10 @@ public class SlideOutable: ClearContainerView {
     var lastScrollOffset: CGFloat
     var lastDragOffset: CGFloat = 0
     
-    var currentOffset: CGFloat {
+    // MARK: Computed
+    
+    /// Returns the current offest of `SlideOutable` object.
+    public internal(set) var currentOffset: CGFloat {
         get {
             return (header ?? scroll).frame.minY
         }
@@ -167,6 +170,11 @@ public class SlideOutable: ClearContainerView {
             // Notifies `delegate`
             delegate?.slideOutable(self, stateChanged: stateForDelegate)
         }
+    }
+    
+    /// Returns the current visible height of `SlideOutable` object.
+    public var currentVisibleHeight: CGFloat {
+        return bounds.height - currentOffset
     }
     
     var minOffset: CGFloat { return isScrollStretchable ? topPadding : max(topPadding, bounds.height - (header?.bounds.height ?? 0) - scroll.contentSize.height) }
