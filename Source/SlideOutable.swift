@@ -37,7 +37,6 @@ public class SlideOutable: ClearContainerView {
         
         // Scroll
         
-        scroll.delegate = self
         scroll.alwaysBounceVertical = true
         scroll.translatesAutoresizingMaskIntoConstraints = true
         scroll.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
@@ -348,11 +347,7 @@ public class SlideOutable: ClearContainerView {
         }
         
         // Stop scroll decelerate
-        if scroll.isDecelerating {
-            scroll.stopDecelerating()
-        } else if scroll.isDragging {
-            isScrollDeceleratingBlocked = true
-        }
+        scroll.stopDecelerating()
         
         // To make sure scroll bottom does not get higher than container bottom during animation spring bounce.
         let antiBounce: CGFloat = 1000
@@ -374,34 +369,43 @@ public class SlideOutable: ClearContainerView {
 
 // MARK: - Scrolling
 
-extension SlideOutable: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        switch interaction(scrollView: scrollView) {
+extension UIScrollView {
+    func stopDecelerating() {
+        setContentOffset(contentOffset, animated: false)
+    }
+}
+
+extension SlideOutable {
+    func didPanScroll(_ pan: UIPanGestureRecognizer) {
+        if pan.state == .began {
+            header?.gestureRecognizers?.first?.stopCurrentGesture()
+        }
+        
+        switch interaction(pan: pan) {
         case .scroll:
-            scrollView.scrollIndicatorInsets.bottom = max(0, scrollView.frame.maxY - bounds.height)
-            scrollView.showsVerticalScrollIndicator = true
-            lastScrollOffset = scrollView.contentOffset.y
+            
+            scroll.scrollIndicatorInsets.bottom = max(0, scroll.frame.maxY - bounds.height)
+            scroll.showsVerticalScrollIndicator = true
+            
+            lastScrollOffset = scroll.contentOffset.y
+            lastDragOffset = pan.translation(in: pan.view).y
+            
+            guard pan.state == .ended, case .dragging = state else { break }
+            didPanDrag(pan)
+            
         case .drag:
-            if lastScrollOffset > 0 && 0 > scrollView.contentOffset.y {
+            if lastScrollOffset > 0 && 0 > scroll.contentOffset.y {
                 // Accounts for missed content offset switching from .scroll to .drag
                 lastDragOffset += lastScrollOffset
                 
                 lastScrollOffset = 0
             }
-            scrollView.showsVerticalScrollIndicator = false
-            scrollView.contentOffset.y = lastScrollOffset
+            scroll.showsVerticalScrollIndicator = false
+            scroll.contentOffset.y = lastScrollOffset
+            
+            // Forwards interaction
+            didPanDrag(pan)
         }
-    }
-    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        guard isScrollDeceleratingBlocked else { return }
-        isScrollDeceleratingBlocked = false
-        scrollView.stopDecelerating()
-    }
-}
-
-extension UIScrollView {
-    func stopDecelerating() {
-        setContentOffset(contentOffset, animated: false)
     }
 }
 
@@ -451,22 +455,6 @@ extension SlideOutable {
         }
         
         lastDragOffset = dragOffset
-    }
-    
-    func didPanScroll(_ pan: UIPanGestureRecognizer) {
-        if pan.state == .began {
-            header?.gestureRecognizers?.first?.stopCurrentGesture()
-        }
-        
-        switch interaction(pan: pan) {
-        case .scroll:
-            lastDragOffset = pan.translation(in: pan.view).y
-            guard pan.state == .ended, case .dragging = state else { break }
-            didPanDrag(pan)
-            
-        case .drag:
-            didPanDrag(pan)
-        }
     }
 }
 
