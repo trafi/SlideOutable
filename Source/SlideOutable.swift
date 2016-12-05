@@ -143,7 +143,6 @@ public class SlideOutable: ClearContainerView {
     // UI
     let header: UIView?
     let scroll: UIScrollView
-    var isScrollDeceleratingBlocked = false
     
     // Offsets
     var lastScrollOffset: CGFloat
