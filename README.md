@@ -11,7 +11,8 @@ As with any other view do these 3 steps:
 
 ```swift
 let scroll = UITableView()
-let header = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 50)) // header's `frame.height` will not change.
+let header = UIView()
+header.frame.size.height = 50 // header's `frame.size.height` should be set.
 // `scroll` and `header` will be added and layed out inside `SlideOutable` instance.
 
 // 1. Initialize
