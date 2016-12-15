@@ -24,15 +24,23 @@ public class SlideOutable: ClearContainerView {
      
      - Returns: An initialized `SlideOutable` view object with `scroll` and optional `header` layed out in it's view hierarchy.
      */
-    public convenience init(frame: CGRect = .zero, scroll: UIScrollView, header: UIView? = nil) {
+    public init(frame: CGRect = .zero, scroll: UIScrollView, header: UIView? = nil) {
         
-        self.init(frame: frame)
+        super.init(frame: frame)
         
         self.header = header
         self.scroll = scroll
         self.lastScrollOffset = scroll.contentOffset.y
         
         setup()
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override public func awakeFromNib() {
