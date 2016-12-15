@@ -24,24 +24,36 @@ public class SlideOutable: ClearContainerView {
      
      - Returns: An initialized `SlideOutable` view object with `scroll` and optional `header` layed out in it's view hierarchy.
      */
-    public init(frame: CGRect = .zero, scroll: UIScrollView, header: UIView? = nil) {
+    public convenience init(frame: CGRect = .zero, scroll: UIScrollView, header: UIView? = nil) {
+        
+        self.init(frame: frame)
         
         self.header = header
         self.scroll = scroll
         self.lastScrollOffset = scroll.contentOffset.y
-        super.init(frame: frame)
         
+        setup()
+    }
+    
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+    
+    private func setup() {
         // Setup
         
         backgroundColor = .clear
         
         // Scroll
         
-        scroll.alwaysBounceVertical = true
+        scroll.removeFromSuperview()
+        scroll.constraints.forEach { scroll.removeConstraint($0) }
         scroll.translatesAutoresizingMaskIntoConstraints = true
         scroll.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         scroll.frame = CGRect(x: 0, y: bounds.height - scroll.bounds.height,
                               width: bounds.width, height: scroll.bounds.height)
+        scroll.alwaysBounceVertical = true
         scroll.keyboardDismissMode = .onDrag
         addSubview(scroll)
         
@@ -49,12 +61,19 @@ public class SlideOutable: ClearContainerView {
         
         scroll.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: .new, context: &scrollContentSizeContext)
         
+        defer {
+            updateScrollSize()
+            update()
+        }
+        
         // Header
         
         guard let header = header else { return }
         
         assert(header.bounds.height >= 0, "`header` frame size height should be greater than 0")
         
+        header.removeFromSuperview()
+        header.constraints.forEach { header.removeConstraint($0) }
         header.translatesAutoresizingMaskIntoConstraints = true
         header.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         header.frame = CGRect(x: 0, y: scroll.frame.minY - header.bounds.height,
@@ -63,14 +82,6 @@ public class SlideOutable: ClearContainerView {
         addSubview(header)
         
         header.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(SlideOutable.didPanDrag(_:))))
-        
-        updateScrollSize()
-        update()
-    }
-    
-    /// Not implemented - should not be called.
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
@@ -88,7 +99,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `0`.
      */
-    public dynamic var topPadding: CGFloat = 0 {
+    @IBInspectable public dynamic var topPadding: CGFloat = 0 {
         didSet { update() }
     }
     
@@ -99,7 +110,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `0.4`.
      */
-    public var anchorFraction: CGFloat? = 0.4 {
+    @IBInspectable public var anchorFraction: CGFloat? = 0.4 {
         didSet { update() }
     }
     
@@ -110,7 +121,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is header's `bounds.height` or `120` if header is not set.
      */
-    public dynamic var minContentHeight: CGFloat = 120 {
+    @IBInspectable public dynamic var minContentHeight: CGFloat = 120 {
         didSet { update() }
     }
     
@@ -119,7 +130,7 @@ public class SlideOutable: ClearContainerView {
      
      Animatable.
      */
-    public var minScrollHeight: CGFloat {
+    @IBInspectable public var minScrollHeight: CGFloat {
         get { return minContentHeight - (header?.bounds.height ?? 0) }
         set { minContentHeight = newValue + (header?.bounds.height ?? 0) }
     }
@@ -131,7 +142,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `true`.
      */
-    public var isScrollStretchable: Bool = true {
+    @IBInspectable public var isScrollStretchable: Bool = true {
         didSet { update() }
     }
     
@@ -141,11 +152,11 @@ public class SlideOutable: ClearContainerView {
     // MARK: Private
     
     // UI
-    let header: UIView?
-    let scroll: UIScrollView
+    @IBOutlet public var header: UIView?
+    @IBOutlet public var scroll: UIScrollView!
     
     // Offsets
-    var lastScrollOffset: CGFloat
+    var lastScrollOffset: CGFloat = 0
     var lastDragOffset: CGFloat = 0
     
     // MARK: Computed
@@ -316,10 +327,12 @@ public class SlideOutable: ClearContainerView {
     }
     
     func updateScrollSize() {
-        scroll.frame.size = CGSize(width: bounds.width, height: bounds.height - (header?.bounds.height ?? 0) - topPadding)
+        scroll?.frame.size = CGSize(width: bounds.width, height: bounds.height - (header?.bounds.height ?? 0) - topPadding)
     }
     
     func update(animated: Bool = false, to targetOffset: CGFloat? = nil, velocity: CGFloat? = nil, keepLastState: Bool = true) {
+        
+        guard scroll != nil else { return }
         
         // Get actual target
         let target: CGFloat

@@ -11,22 +11,8 @@ import SlideOutable
 
 class ViewController: UIViewController {
 
-    var container: SlideOutable!
-    @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var tableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.removeFromSuperview()
-        searchBar.removeFromSuperview()
-        
-        container = SlideOutable(frame: view.bounds, scroll: tableView, header: searchBar)
-        container.delegate = self
-        container.topPadding = 44
-        
-        container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(container)
+    @IBOutlet var container: SlideOutable! {
+        didSet { container.delegate = self }
     }
     
     let cells = ["Vilnius", "New York", "San Francisco", "Paris", "Berlin", "London", "Madrid", "Rome", "Mumbai", "Buenos Aires", "Oslo", "Helsinki"]
