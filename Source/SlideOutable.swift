@@ -332,6 +332,13 @@ public class SlideOutable: ClearContainerView {
         }
     }
     
+    public override var bounds: CGRect {
+        didSet {
+            updateScrollSize()
+            update()
+        }
+    }
+    
     func updateScrollSize() {
         scroll?.frame.size = CGSize(width: bounds.width, height: bounds.height - (header?.bounds.height ?? 0) - topPadding)
     }
