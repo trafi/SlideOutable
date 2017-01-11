@@ -10,6 +10,7 @@
 		D307A2C81DABD2640072E3FB /* SlideOutable.h in Headers */ = {isa = PBXBuildFile; fileRef = D307A2C61DABD2640072E3FB /* SlideOutable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */; };
 		D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */; };
+		D36BD2661E2680DE006C444F /* EquatableFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36BD2641E2680B9006C444F /* EquatableFloat.swift */; };
 		D3B0BC471DE6E53400E270B2 /* SlideOutableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B0BC451DE6E49900E270B2 /* SlideOutableDelegate.swift */; };
 		ED00FF931CEDCD0500A5BEC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00FF921CEDCD0500A5BEC9 /* AppDelegate.swift */; };
 		ED00FF951CEDCD0500A5BEC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00FF941CEDCD0500A5BEC9 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 		D307A2C41DABD2640072E3FB /* SlideOutable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlideOutable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D307A2C61DABD2640072E3FB /* SlideOutable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlideOutable.h; sourceTree = "<group>"; };
 		D307A2C71DABD2640072E3FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D36BD2641E2680B9006C444F /* EquatableFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableFloat.swift; sourceTree = "<group>"; };
 		D3B0BC451DE6E49900E270B2 /* SlideOutableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideOutableDelegate.swift; sourceTree = "<group>"; };
 		ED00FF8F1CEDCD0500A5BEC9 /* SlideOutableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideOutableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED00FF921CEDCD0500A5BEC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */,
 				ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */,
 				D3B0BC451DE6E49900E270B2 /* SlideOutableDelegate.swift */,
+				D36BD2641E2680B9006C444F /* EquatableFloat.swift */,
 			);
 			name = Source;
 			path = ../Source;
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */,
+				D36BD2661E2680DE006C444F /* EquatableFloat.swift in Sources */,
 				D3B0BC471DE6E53400E270B2 /* SlideOutableDelegate.swift in Sources */,
 				D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */,
 			);

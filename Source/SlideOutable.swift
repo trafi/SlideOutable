@@ -251,12 +251,12 @@ public class SlideOutable: ClearContainerView {
     }
     
     func state(forOffset offset: CGFloat) -> State {
-        switch offset {
-        case minOffset:
+        switch offset.equatable {
+        case minOffset.equatable:
             return .settled(.expanded)
-        case anchorOffset ?? minOffset: // Makes compiler happy, dev sad :(
+        case anchorOffset?.equatable ?? minOffset.equatable: // Makes compiler happy, dev sad :(
             return .settled(.anchored)
-        case maxOffset:
+        case maxOffset.equatable:
             return .settled(.collapsed)
         default:
             return .dragging(offset: currentOffset)
