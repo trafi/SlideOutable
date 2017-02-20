@@ -220,7 +220,7 @@ public class SlideOutable: ClearContainerView {
             guard lastScrollOffset != scroll.contentOffset.y else { return }
             scrollViewDidScroll(scroll)
         case #keyPath(UIScrollView.contentSize):
-            guard !isScrollStretchable else { return }
+            guard !isScrollStretchable && !isAnyGestureActive else { return }
             update()
         default:
             break
@@ -287,8 +287,11 @@ public class SlideOutable: ClearContainerView {
         }
     }
     
+    var isAnyGestureActive: Bool {
+        return scroll.panGestureRecognizer.isActive || header?.gestureRecognizers?.first { $0.isActive } != nil
+    }
+    
     var stateForDelegate: State {
-        let isAnyGestureActive = header?.gestureRecognizers?.first?.isActive ?? scroll.panGestureRecognizer.isActive
         guard isAnyGestureActive else { return state }
         return .dragging(offset: currentOffset)
     }
