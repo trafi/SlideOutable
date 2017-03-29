@@ -92,8 +92,8 @@ public class SlideOutable: ClearContainerView {
     }
     
     deinit {
-        scroll.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), context: &scrollContentContext)
-        scroll.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), context: &scrollContentContext)
+        scroll?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), context: &scrollContentContext)
+        scroll?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), context: &scrollContentContext)
     }
     
     // MARK: - Properties
