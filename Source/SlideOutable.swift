@@ -11,7 +11,7 @@ import UIKit
 // MARK: - SlideOutable Implementation
 
 /// View that presents header and scroll in a sliding manner.
-public class SlideOutable: ClearContainerView {
+open class SlideOutable: ClearContainerView {
     
     // MARK: Init
     
@@ -43,7 +43,7 @@ public class SlideOutable: ClearContainerView {
         super.init(coder: aDecoder)
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
@@ -107,7 +107,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `0`.
      */
-    @IBInspectable public dynamic var topPadding: CGFloat = 0 {
+    @IBInspectable open dynamic var topPadding: CGFloat = 0 {
         didSet { update() }
     }
     
@@ -118,7 +118,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `0.4`.
      */
-    @IBInspectable public var anchorFraction: CGFloat? = 0.4 {
+    @IBInspectable open var anchorFraction: CGFloat? = 0.4 {
         didSet { update() }
     }
     
@@ -129,7 +129,7 @@ public class SlideOutable: ClearContainerView {
      
      The default value is header's `bounds.height` or `120` if header is not set.
      */
-    @IBInspectable public dynamic var minContentHeight: CGFloat = 120 {
+    @IBInspectable open dynamic var minContentHeight: CGFloat = 120 {
         didSet { update() }
     }
     
@@ -138,7 +138,7 @@ public class SlideOutable: ClearContainerView {
      
      Animatable.
      */
-    @IBInspectable public var minScrollHeight: CGFloat {
+    @IBInspectable open var minScrollHeight: CGFloat {
         get { return minContentHeight - (header?.bounds.height ?? 0) }
         set { minContentHeight = newValue + (header?.bounds.height ?? 0) }
     }
@@ -150,18 +150,18 @@ public class SlideOutable: ClearContainerView {
      
      The default value is `true`.
      */
-    @IBInspectable public var isScrollStretchable: Bool = true {
+    @IBInspectable open var isScrollStretchable: Bool = true {
         didSet { update() }
     }
     
     /// The delegate of `SlideOutable` object.
-    public weak var delegate: SlideOutableDelegate?
+    open weak var delegate: SlideOutableDelegate?
     
     // MARK: Private
     
     // UI
-    @IBOutlet public var header: UIView?
-    @IBOutlet public var scroll: UIScrollView!
+    @IBOutlet open var header: UIView?
+    @IBOutlet open var scroll: UIScrollView!
     
     // Offsets
     var lastScrollOffset: CGFloat = 0
@@ -209,7 +209,7 @@ public class SlideOutable: ClearContainerView {
     
     private var scrollContentContext = 0
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &scrollContentContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
@@ -339,14 +339,14 @@ public class SlideOutable: ClearContainerView {
     
     // MARK: - Updates
     
-    public override var frame: CGRect {
+    open override var frame: CGRect {
         didSet {
             updateScrollSize()
             update()
         }
     }
     
-    public override var bounds: CGRect {
+    open override var bounds: CGRect {
         didSet {
             updateScrollSize()
             update()
