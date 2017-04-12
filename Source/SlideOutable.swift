@@ -32,7 +32,7 @@ open class SlideOutable: ClearContainerView {
         self.scroll = scroll
         self.lastScrollOffset = scroll.contentOffset.y
         
-        setup()
+        setupIfNeeded()
     }
     
     public override init(frame: CGRect) {
@@ -45,10 +45,16 @@ open class SlideOutable: ClearContainerView {
     
     override open func awakeFromNib() {
         super.awakeFromNib()
-        setup()
+        setupIfNeeded()
     }
     
-    private func setup() {
+    
+    private var needsSetup = true
+    private func setupIfNeeded() {
+        
+        guard needsSetup else { return }
+        needsSetup = false
+        
         // Setup
         
         backgroundColor = .clear
