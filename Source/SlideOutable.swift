@@ -176,7 +176,7 @@ open class SlideOutable: ClearContainerView {
     
     // MARK: Computed
     
-    //header height
+    /// Set header height. Setting height directly corrupts `SlideOutable` frames.
     public func setHeaderHeight(height: CGFloat) {
         header?.frame.size.height = height
         if let maxY = header?.frame.maxY {
