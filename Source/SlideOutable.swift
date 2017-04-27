@@ -173,7 +173,16 @@ open class SlideOutable: ClearContainerView {
     var lastScrollOffset: CGFloat = 0
     var lastDragOffset: CGFloat = 0
     
+    
     // MARK: Computed
+    
+    //header height
+    public func setHeaderHeight(height: CGFloat) {
+        header?.frame.size.height = height
+        if let maxY = header?.frame.maxY {
+            scroll.frame.origin.y = maxY
+        }
+    }
     
     /// Returns the current offest of `SlideOutable` object.
     public internal(set) var currentOffset: CGFloat {
@@ -185,6 +194,10 @@ open class SlideOutable: ClearContainerView {
             
             // Save last state
             lastState = state(forOffset: newValue)
+            
+            if let headerHeight = delegate?.slideOutableHeaderHeight(for: currentOffset) {
+                header?.frame.size.height = headerHeight
+            }
             
             // Change state
             header?.frame.origin.y = newValue
