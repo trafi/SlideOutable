@@ -471,7 +471,7 @@ extension SlideOutable {
         return (offset, offset - targetOffset)
     }
     
-    func didPanDrag(_ pan: UIPanGestureRecognizer) {
+    public func didPanDrag(_ pan: UIPanGestureRecognizer) {
         let dragOffset = pan.translation(in: pan.view).y
         var diff = lastDragOffset - dragOffset
         
