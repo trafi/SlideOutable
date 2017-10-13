@@ -200,7 +200,21 @@ open class SlideOutable: ClearContainerView {
         return bounds.height - currentOffset
     }
     
-    var minOffset: CGFloat { return isScrollStretchable ? topPadding : max(topPadding, bounds.height - (header?.bounds.height ?? 0) - scroll.contentSize.height) }
+    var minOffset: CGFloat {
+        if isScrollStretchable {
+            return topPadding
+        } else {
+            let insets: UIEdgeInsets
+            if #available(iOS 11.0, *) {
+                insets = scroll.adjustedContentInset
+            } else {
+                insets = scroll.contentInset
+            }
+            let insetsOffset = insets.bottom + insets.top
+            let calculatedOffset = bounds.height - (header?.bounds.height ?? 0) - scroll.contentSize.height - insetsOffset
+            return max(topPadding, calculatedOffset)
+        }
+    }
     var maxOffset: CGFloat { return max(minOffset, bounds.height - minContentHeight) }
     var anchorOffset: CGFloat? { return anchorFraction.flatMap { bounds.height * (1 - $0) } }
     
