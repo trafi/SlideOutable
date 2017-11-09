@@ -100,6 +100,10 @@ open class SlideOutable: ClearContainerView {
     deinit {
         scroll?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), context: &scrollContentContext)
         scroll?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), context: &scrollContentContext)
+
+        subscrolls.allObjects.forEach { subscroll in
+            subscroll.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), context: &scrollContentContext)
+        }
     }
     
     // MARK: - Properties
@@ -162,7 +166,23 @@ open class SlideOutable: ClearContainerView {
     
     /// The delegate of `SlideOutable` object.
     open weak var delegate: SlideOutableDelegate?
-    
+
+    open func addSubscroll(_ newScroll: UIScrollView) {
+        newScroll.panGestureRecognizer.addTarget(self, action: #selector(SlideOutable.didPanScroll(_:)))
+        newScroll.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: .new, context: &scrollContentContext)
+        subscrolls.add(newScroll)
+    }
+
+    let subscrolls = NSHashTable<UIScrollView>.weakObjects()
+
+    weak var lastActiveScroll: UIScrollView? {
+        didSet {
+            guard lastActiveScroll !== oldValue else { return }
+            lastScrollOffset = activeScroll.contentOffset.y
+        }
+    }
+    var activeScroll: UIScrollView { return lastActiveScroll ?? scroll }
+
     // MARK: Private
     
     // UI
@@ -201,7 +221,7 @@ open class SlideOutable: ClearContainerView {
     }
     
     var minOffset: CGFloat {
-        if isScrollStretchable {
+        if isScrollStretchable || subscrolls.count > 0 {
             return topPadding
         } else {
             let insets: UIEdgeInsets
@@ -234,7 +254,9 @@ open class SlideOutable: ClearContainerView {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-        guard let keyPath = keyPath else { return }
+
+        guard let keyPath = keyPath, let scroll = object as? UIScrollView else { return }
+        guard subscrolls.count == 0 || self.scroll !== scroll  else { return }
         switch keyPath {
         case #keyPath(UIScrollView.contentOffset):
             guard lastScrollOffset != scroll.contentOffset.y else { return }
@@ -308,7 +330,7 @@ open class SlideOutable: ClearContainerView {
     }
     
     var isAnyGestureActive: Bool {
-        return scroll.panGestureRecognizer.isActive || header?.gestureRecognizers?.first { $0.isActive } != nil
+        return activeScroll.panGestureRecognizer.isActive || header?.gestureRecognizers?.first { $0.isActive } != nil
     }
     
     var stateForDelegate: State {
@@ -343,7 +365,7 @@ open class SlideOutable: ClearContainerView {
     }
     
     func interaction(forDirection direction: Interaction.Direction) -> Interaction {
-        return Interaction(direction: direction, in: state, scrolledToTop: scroll.contentOffset.y <= 0)
+        return Interaction(direction: direction, in: state, scrolledToTop: activeScroll.contentOffset.y <= 0)
     }
     func interaction(scrollView: UIScrollView) -> Interaction {
         // Enable bouncing
@@ -406,12 +428,12 @@ open class SlideOutable: ClearContainerView {
         }
         
         // Stop scroll decelerate
-        scroll.stopDecelerating()
+        activeScroll.stopDecelerating()
         
         // To make sure scroll bottom does not get higher than container bottom during animation spring bounce.
         let antiBounce: CGFloat = 1000
-        scroll.frame.size.height += antiBounce
-        scroll.contentInset.bottom += antiBounce
+        activeScroll.frame.size.height += antiBounce
+        activeScroll.contentInset.bottom += antiBounce
         
         // Animate to new height
         UIView.animate(withDuration: 0.5, delay: 0,
@@ -421,7 +443,7 @@ open class SlideOutable: ClearContainerView {
                        animations: { self.currentOffset = offset },
                        completion: { _ in
                         self.updateScrollSize()
-                        self.scroll.contentInset.bottom -= antiBounce
+                        self.activeScroll.contentInset.bottom -= antiBounce
         })
     }
 }
@@ -430,6 +452,9 @@ open class SlideOutable: ClearContainerView {
 
 extension SlideOutable {
     fileprivate func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        lastActiveScroll = scrollView
+
         switch interaction(scrollView: scrollView) {
         case .scroll:
             scrollView.scrollIndicatorInsets.bottom = max(0, scrollView.frame.maxY - bounds.height)
@@ -456,6 +481,10 @@ extension UIScrollView {
 
 extension SlideOutable {
     func didPanScroll(_ pan: UIPanGestureRecognizer) {
+        guard subscrolls.count == 0 || scroll !== pan.view else { return }
+
+        lastActiveScroll = pan.view as? UIScrollView
+
         if pan.state == .began {
             header?.gestureRecognizers?.first?.stopCurrentGesture()
         }
@@ -489,11 +518,11 @@ extension SlideOutable {
         let dragOffset = pan.translation(in: pan.view).y
         var diff = lastDragOffset - dragOffset
         
-        let isScrollPan = scroll.panGestureRecognizer == pan
+        let isScrollPan = activeScroll.panGestureRecognizer == pan
         
         switch pan.state {
         case .began where !isScrollPan:
-            scroll.panGestureRecognizer.stopCurrentGesture()
+            activeScroll.panGestureRecognizer.stopCurrentGesture()
             
         case .changed:
             // If starts dragging while scroll is in a bounce
@@ -502,7 +531,7 @@ extension SlideOutable {
                     diff -= lastScrollOffset
                 }
                 lastScrollOffset = 0
-                scroll.contentOffset.y = 0
+                activeScroll.contentOffset.y = 0
             }
             
             guard let offset = offset(forDiff: diff) else { break }
@@ -510,7 +539,7 @@ extension SlideOutable {
             
             // Accounts for clipped pan switching from .drag to .scroll
             guard offset.clipped != 0, isScrollPan else { break }
-            scroll.contentOffset.y += offset.clipped
+            activeScroll.contentOffset.y += offset.clipped
             
         case .ended:
             let velocity = pan.velocity(in: pan.view).y
