@@ -383,6 +383,7 @@ open class SlideOutable: ClearContainerView {
     
     open override var frame: CGRect {
         didSet {
+            guard oldValue.size != frame.size else { return }
             updateScrollSize()
             update()
         }
@@ -390,6 +391,7 @@ open class SlideOutable: ClearContainerView {
     
     open override var bounds: CGRect {
         didSet {
+            guard oldValue.size != bounds.size else { return }
             updateScrollSize()
             update()
         }
