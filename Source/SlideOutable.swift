@@ -455,6 +455,8 @@ open class SlideOutable: ClearContainerView {
 extension SlideOutable {
     fileprivate func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
+        guard scrollView.isDragging || scrollView.isDecelerating else { return }
+
         lastActiveScroll = scrollView
 
         switch interaction(scrollView: scrollView) {
@@ -470,7 +472,9 @@ extension SlideOutable {
                 lastScrollOffset = 0
             }
             scrollView.showsVerticalScrollIndicator = false
-            scrollView.contentOffset.y = lastScrollOffset
+            if lastScrollOffset >= 0 {
+                scrollView.contentOffset.y = lastScrollOffset
+            }
         }
     }
 }
