@@ -461,7 +461,6 @@ extension SlideOutable {
 
         switch interaction(scrollView: scrollView) {
         case .scroll:
-            scrollView.scrollIndicatorInsets.bottom = max(0, scrollView.frame.maxY - bounds.height)
             scrollView.showsVerticalScrollIndicator = true
             lastScrollOffset = scrollView.contentOffset.y
         case .drag:
