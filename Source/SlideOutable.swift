@@ -128,7 +128,7 @@ open class SlideOutable: ClearContainerView {
      
      The default value is `0.4`.
      */
-    @IBInspectable open var anchorFraction: CGFloat = 0.4 {
+    open var anchorFraction: CGFloat? = 0.4 {
         didSet { update() }
     }
     
@@ -236,11 +236,11 @@ open class SlideOutable: ClearContainerView {
         }
     }
     var maxOffset: CGFloat { return max(minOffset, bounds.height - minContentHeight) }
-    var anchorOffset: CGFloat { return bounds.height * (1 - anchorFraction) }
+    var anchorOffset: CGFloat? { return anchorFraction.flatMap { bounds.height * (1 - $0) } }
     
     var snapOffsets: [CGFloat] {
         return [maxOffset, anchorOffset].reduce([minOffset]) { offsets, offset in
-            guard offset > minOffset else { return offsets }
+            guard let offset = offset, offset > minOffset else { return offsets }
             return offsets + [offset]
         }
     }
@@ -307,7 +307,7 @@ open class SlideOutable: ClearContainerView {
         switch offset.equatable {
         case minOffset.equatable:
             return .settled(.expanded)
-        case anchorOffset.equatable:
+        case anchorOffset?.equatable ?? minOffset.equatable: // Makes compiler happy, dev sad :(
             return .settled(.anchored)
         case maxOffset.equatable:
             return .settled(.collapsed)
