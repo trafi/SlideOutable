@@ -128,7 +128,7 @@ open class SlideOutable: ClearContainerView {
      
      The default value is `0.4`.
      */
-    @IBInspectable open var anchorFraction: CGFloat? = 0.4 {
+    open var anchorFraction: CGFloat? = 0.4 {
         didSet { update() }
     }
     
@@ -485,6 +485,8 @@ extension UIScrollView {
 }
 
 extension SlideOutable {
+
+    @objc
     func didPanScroll(_ pan: UIPanGestureRecognizer) {
         guard subscrolls.count == 0 || scroll !== pan.view else { return }
 
@@ -518,7 +520,8 @@ extension SlideOutable {
         let offset = min(maxOffset, max(minOffset, targetOffset))
         return (offset, offset - targetOffset)
     }
-    
+
+    @objc
     public func didPanDrag(_ pan: UIPanGestureRecognizer) {
         let dragOffset = pan.translation(in: pan.view).y
         var diff = lastDragOffset - dragOffset
