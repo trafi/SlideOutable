@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0C844A422F400C800DD958A /* SlideOutable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D307A2C41DABD2640072E3FB /* SlideOutable.framework */; };
 		D307A2C81DABD2640072E3FB /* SlideOutable.h in Headers */ = {isa = PBXBuildFile; fileRef = D307A2C61DABD2640072E3FB /* SlideOutable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */; };
 		D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */; };
@@ -50,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0C844A422F400C800DD958A /* SlideOutable.framework in Frameworks */,
 				ED00FFA51CEDD53E00A5BEC9 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +59,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0C844A022F4009500DD958A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D307A2C51DABD2640072E3FB /* SlideOutable */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +83,7 @@
 				ED00FF911CEDCD0500A5BEC9 /* SlideOutable */,
 				D307A2C51DABD2640072E3FB /* SlideOutable */,
 				ED00FF901CEDCD0500A5BEC9 /* Products */,
+				C0C844A022F4009500DD958A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,7 +285,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SlideOutable/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Trafi.SlideOutable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -300,7 +310,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SlideOutable/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Trafi.SlideOutable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -424,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/SlideOutable/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.domas.SlideOutable;
 				PRODUCT_NAME = SlideOutableExample;
@@ -436,6 +447,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/SlideOutable/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.domas.SlideOutable;
 				PRODUCT_NAME = SlideOutableExample;

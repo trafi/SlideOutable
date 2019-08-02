@@ -437,16 +437,18 @@ open class SlideOutable: ClearContainerView {
         activeScroll.frame.size.height += antiBounce
         activeScroll.contentInset.bottom += antiBounce
         
-        // Animate to new height
-        UIView.animate(withDuration: 0.5, delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: velocity.flatMap { abs($0 / (currentOffset - offset)) } ?? 1,
-                       options: .curveLinear,
-                       animations: { self.currentOffset = offset },
-                       completion: { _ in
-                        self.updateScrollSize()
-                        self.activeScroll.contentInset.bottom -= antiBounce
-        })
+        let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+        
+        animator.addAnimations {
+            self.currentOffset = offset
+        }
+        
+        animator.addCompletion { _ in
+            self.updateScrollSize()
+            self.activeScroll.contentInset.bottom -= antiBounce
+        }
+        
+        animator.startAnimation()
     }
 }
 
