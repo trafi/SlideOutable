@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C0C844A422F400C800DD958A /* SlideOutable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D307A2C41DABD2640072E3FB /* SlideOutable.framework */; };
 		D307A2C81DABD2640072E3FB /* SlideOutable.h in Headers */ = {isa = PBXBuildFile; fileRef = D307A2C61DABD2640072E3FB /* SlideOutable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */; };
 		D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */; };
@@ -51,7 +50,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0C844A422F400C800DD958A /* SlideOutable.framework in Frameworks */,
 				ED00FFA51CEDD53E00A5BEC9 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
