@@ -100,7 +100,7 @@ open class SlideOutable: ClearContainerView {
     deinit {
         scroll?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), context: &scrollContentContext)
         scroll?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), context: &scrollContentContext)
-
+        
         subscrolls.allObjects.forEach { subscroll in
             subscroll.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), context: &scrollContentContext)
         }
@@ -109,7 +109,7 @@ open class SlideOutable: ClearContainerView {
     // MARK: - Properties
     
     // MARK: Configurable
-
+    
     /**
      The top padding that contents will not scroll on.
      
@@ -166,15 +166,15 @@ open class SlideOutable: ClearContainerView {
     
     /// The delegate of `SlideOutable` object.
     open weak var delegate: SlideOutableDelegate?
-
+    
     open func addSubscroll(_ newScroll: UIScrollView) {
         newScroll.panGestureRecognizer.addTarget(self, action: #selector(SlideOutable.didPanScroll(_:)))
         newScroll.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: .new, context: &scrollContentContext)
         subscrolls.add(newScroll)
     }
-
+    
     let subscrolls = NSHashTable<UIScrollView>.weakObjects()
-
+    
     weak var lastActiveScroll: UIScrollView? {
         didSet {
             guard lastActiveScroll !== oldValue else { return }
@@ -182,7 +182,7 @@ open class SlideOutable: ClearContainerView {
         }
     }
     var activeScroll: UIScrollView { return lastActiveScroll ?? scroll }
-
+    
     // MARK: Private
     
     // UI
@@ -254,7 +254,7 @@ open class SlideOutable: ClearContainerView {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-
+        
         guard let keyPath = keyPath, let scroll = object as? UIScrollView else { return }
         guard subscrolls.count == 0 || self.scroll !== scroll  else { return }
         switch keyPath {
@@ -432,20 +432,17 @@ open class SlideOutable: ClearContainerView {
         // Stop scroll decelerate
         activeScroll.stopDecelerating()
         
-        // To make sure scroll bottom does not get higher than container bottom during animation spring bounce.
-        let antiBounce: CGFloat = 1000
-        activeScroll.frame.size.height += antiBounce
-        activeScroll.contentInset.bottom += antiBounce
+        let initialVelocity = CGVector(dx: (velocity ?? 0) / 1000 , dy: (velocity ?? 0) / 1000)
+        let timingCurve = UISpringTimingParameters(dampingRatio: 0.8, initialVelocity: initialVelocity)
         
-        let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+        let animator = UIViewPropertyAnimator(duration: 0.3, timingParameters: timingCurve)
         
         animator.addAnimations {
             self.currentOffset = offset
         }
         
-        animator.addCompletion { _ in
+        animator.addCompletion { (_) in
             self.updateScrollSize()
-            self.activeScroll.contentInset.bottom -= antiBounce
         }
         
         animator.startAnimation()
@@ -456,11 +453,11 @@ open class SlideOutable: ClearContainerView {
 
 extension SlideOutable {
     fileprivate func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         guard scrollView.isDragging || scrollView.isDecelerating else { return }
-
+        
         lastActiveScroll = scrollView
-
+        
         switch interaction(scrollView: scrollView) {
         case .scroll:
             scrollView.showsVerticalScrollIndicator = true
@@ -487,13 +484,13 @@ extension UIScrollView {
 }
 
 extension SlideOutable {
-
+    
     @objc
     func didPanScroll(_ pan: UIPanGestureRecognizer) {
         guard subscrolls.count == 0 || scroll !== pan.view else { return }
-
+        
         lastActiveScroll = pan.view as? UIScrollView
-
+        
         if pan.state == .began {
             header?.gestureRecognizers?.first?.stopCurrentGesture()
         }
@@ -522,7 +519,7 @@ extension SlideOutable {
         let offset = min(maxOffset, max(minOffset, targetOffset))
         return (offset, offset - targetOffset)
     }
-
+    
     @objc
     public func didPanDrag(_ pan: UIPanGestureRecognizer) {
         let dragOffset = pan.translation(in: pan.view).y
