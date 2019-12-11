@@ -19,8 +19,11 @@ open class ClearContainerView: UIView {
 
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let superHit = super.hitTest(point, with: event)
-        guard backgroundColor == nil || backgroundColor == .clear else { return superHit }
-        
-        return self == superHit ? viewForClearTouches?.hitTest(point, with: event) : superHit
+        guard
+            backgroundColor == nil || backgroundColor == .clear,
+            self == superHit
+        else { return superHit }
+
+        return viewForClearTouches?.hitTest(convert(point, to: viewForClearTouches), with: event)
     }
 }
