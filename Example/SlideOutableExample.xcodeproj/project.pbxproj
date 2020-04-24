@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C043C7702452D9FA0064D6D7 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043C76F2452D9FA0064D6D7 /* Package.swift */; };
 		D307A2C81DABD2640072E3FB /* SlideOutable.h in Headers */ = {isa = PBXBuildFile; fileRef = D307A2C61DABD2640072E3FB /* SlideOutable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D307A2CC1DABD2730072E3FB /* ClearContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */; };
 		D307A2CD1DABD2730072E3FB /* SlideOutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C043C76F2452D9FA0064D6D7 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		D307A2C41DABD2640072E3FB /* SlideOutable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlideOutable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D307A2C61DABD2640072E3FB /* SlideOutable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlideOutable.h; sourceTree = "<group>"; };
 		D307A2C71DABD2640072E3FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +59,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C043C74C2452D6C40064D6D7 /* SlideOutable */ = {
+			isa = PBXGroup;
+			children = (
+				ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */,
+				ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */,
+				D3B0BC451DE6E49900E270B2 /* SlideOutableDelegate.swift */,
+				D36BD2641E2680B9006C444F /* EquatableFloat.swift */,
+			);
+			path = SlideOutable;
+			sourceTree = "<group>";
+		};
 		C0C844A022F4009500DD958A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +89,9 @@
 		ED00FF861CEDCD0500A5BEC9 = {
 			isa = PBXGroup;
 			children = (
+				C043C76F2452D9FA0064D6D7 /* Package.swift */,
 				ED00FFA41CEDD53E00A5BEC9 /* MapKit.framework */,
-				ED097D2B1CEF3CEA0045362A /* Source */,
+				ED097D2B1CEF3CEA0045362A /* Sources */,
 				ED00FF911CEDCD0500A5BEC9 /* SlideOutable */,
 				D307A2C51DABD2640072E3FB /* SlideOutable */,
 				ED00FF901CEDCD0500A5BEC9 /* Products */,
@@ -107,16 +121,13 @@
 			path = SlideOutable;
 			sourceTree = "<group>";
 		};
-		ED097D2B1CEF3CEA0045362A /* Source */ = {
+		ED097D2B1CEF3CEA0045362A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				ED097D2C1CEF3CEA0045362A /* ClearContainerView.swift */,
-				ED097D2D1CEF3CEA0045362A /* SlideOutable.swift */,
-				D3B0BC451DE6E49900E270B2 /* SlideOutableDelegate.swift */,
-				D36BD2641E2680B9006C444F /* EquatableFloat.swift */,
+				C043C74C2452D6C40064D6D7 /* SlideOutable */,
 			);
-			name = Source;
-			path = ../Source;
+			name = Sources;
+			path = ../Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C043C7702452D9FA0064D6D7 /* Package.swift in Sources */,
 				ED00FF951CEDCD0500A5BEC9 /* ViewController.swift in Sources */,
 				ED00FF931CEDCD0500A5BEC9 /* AppDelegate.swift in Sources */,
 			);

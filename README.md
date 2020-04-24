@@ -27,10 +27,16 @@ view.addSubview(slideOutable)
 
 ```
 
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+
 ## From Interface Builder
 See [example project](/Example/SlideOutable).
 
 # Installation
+
+### [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
+Open your project in Xcode and select File > Swift Packages > Add Package Dependency. There enter `https://github.com/trafi/SlideOuatable` as the repository URL.
+
 Using [Carthage](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application). Add the following line to your Cartfile:
 ```
 github "Trafi/SlideOutable"
