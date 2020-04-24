@@ -6,7 +6,7 @@
 //  Copyright © 2017 Domas Nutautas. All rights reserved.
 //
 
-import Foundation
+import CoreGraphics
 
 struct EquatableFloat: Equatable {
     let float: CGFloat
