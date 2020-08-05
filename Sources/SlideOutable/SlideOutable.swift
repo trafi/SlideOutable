@@ -461,7 +461,14 @@ extension SlideOutable {
         switch interaction(scrollView: scrollView) {
         case .scroll:
             scrollView.showsVerticalScrollIndicator = true
-            lastScrollOffset = scrollView.contentOffset.y
+
+            // When scroll is not strechable
+            if scrollView.contentOffset.y >= 0 && !isScrollStretchable && currentVisibleHeight < scrollView.frame.height {
+                scrollView.contentOffset.y = 0
+            } else {
+                lastScrollOffset = scrollView.contentOffset.y
+            }
+
         case .drag:
             if lastScrollOffset > 0 && 0 > scrollView.contentOffset.y {
                 // Accounts for missed content offset switching from .scroll to .drag
