@@ -120,18 +120,23 @@ open class SlideOutable: ClearContainerView {
     @IBInspectable open dynamic var topPadding: CGFloat = 0 {
         didSet { update() }
     }
-    
-    /**
-     The mid anchor fraction from `0` (the very bottom) to `1` the very top of the `SlideOutable` view bounds. Setting it to `nil` would disable the anchoring.
-     
-     Animatable.
-     
-     The default value is `0.4`.
-     */
-    open var anchorFraction: CGFloat? = 0.4 {
-        didSet { update() }
-    }
-    
+
+    public enum Anchor {
+         case fraction(CGFloat)
+         case halfContentSizeFraction
+     }
+
+     /**
+      The mid anchor fraction from `0` (the very bottom) to `1` the very top of the `SlideOutable` view bounds. Setting it to `nil` would disable the anchoring.
+
+      Animatable.
+
+      The default value is `fraction(0.4)`.
+      */
+     open var anchorFraction: Anchor? = .fraction(0.4) {
+         didSet { update() }
+     }
+
     /**
      The minimum content visible content (header and scroll) height.
      
@@ -235,9 +240,20 @@ open class SlideOutable: ClearContainerView {
             return max(topPadding, calculatedOffset)
         }
     }
+
     var maxOffset: CGFloat { return max(minOffset, bounds.height - minContentHeight) }
-    var anchorOffset: CGFloat? { return anchorFraction.flatMap { bounds.height * (1 - $0) } }
-    
+
+    var anchorOffset: CGFloat? {
+        switch anchorFraction {
+        case .halfContentSizeFraction:
+            return bounds.height - min(bounds.height, scroll.contentSize.height + (header?.bounds.height ?? 0)) / 2
+        case .fraction(let value):
+            return bounds.height * (1 - value)
+        default :
+            return nil
+        }
+    }
+
     var snapOffsets: [CGFloat] {
         return [maxOffset, anchorOffset].reduce([minOffset]) { offsets, offset in
             guard let offset = offset, offset > minOffset else { return offsets }
