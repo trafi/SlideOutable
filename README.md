@@ -32,7 +32,7 @@ See [example project](/Example/SlideOutable).
 # Installation
 
 ### [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
-Open your project in Xcode and select File > Swift Packages > Add Package Dependency. There enter `https://github.com/trafi/SlideOuatable` as the repository URL.
+Open your project in Xcode and select File > Swift Packages > Add Package Dependency. There enter `https://github.com/trafi/SlideOutable` as the repository URL.
 
 ### [Carthage](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application)
 Using Carthage. Add the following line to your Cartfile:
