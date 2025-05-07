@@ -471,7 +471,10 @@ extension SlideOutable {
             }
             scrollView.showsVerticalScrollIndicator = false
             if lastScrollOffset >= 0 {
-                scrollView.contentOffset.y = lastScrollOffset
+                DispatchQueue.main.async { [weak scrollView] in
+                    guard let scrollView else { return }
+                    scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.lastScrollOffset), animated: false)
+                }
             }
         }
     }
