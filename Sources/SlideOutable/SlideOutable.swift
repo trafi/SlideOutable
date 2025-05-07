@@ -471,7 +471,12 @@ extension SlideOutable {
             }
             scrollView.showsVerticalScrollIndicator = false
             if lastScrollOffset >= 0 {
-                scrollView.contentOffset.y = lastScrollOffset
+                // Updating contentOffset asynchronously helps prevent crashes during active scrolling
+                // by ensuring the update occurs on the main thread and avoids potential race conditions.
+                DispatchQueue.main.async { [weak self, weak scrollView] in
+                    guard let self = self, let scrollView = scrollView else { return }
+                    scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: self.lastScrollOffset), animated: false)
+                }
             }
         }
     }
